@@ -32,7 +32,7 @@ namespace TestNinja.UnitTests
         }
 
         [TestMethod]
-        public void CanBeCancelledBy_UserIsNotMadeByUserOrAdmin_ReturnsFalse()
+        public void CanBeCancelledBy_UserIsNotMadeByUserOrAnAdmin_ReturnsFalse()
         {
             var reservation = new Reservation();
 
@@ -40,5 +40,7 @@ namespace TestNinja.UnitTests
 
             Assert.IsFalse(result);
         }
+
+
     }
 }
