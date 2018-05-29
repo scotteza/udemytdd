@@ -1,2 +1,6 @@
 TestNinja.UnitTests/obj/
 TestNinja/obj/
+.vs/
+packages/
+TestNinja.UnitTests/bin/
+TestNinja/bin/
