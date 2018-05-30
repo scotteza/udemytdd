@@ -6,14 +6,7 @@
 
         public bool CanBeCancelledBy(User user)
         {
-            if (user.IsAdmin)
-                return true;
-
-            // ReSharper disable once ConvertIfStatementToReturnStatement
-            if (MadeBy == user)
-                return true;
-
-            return false;
+            return user.IsAdmin || MadeBy == user;
         }
     }
 
