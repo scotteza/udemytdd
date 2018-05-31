@@ -12,14 +12,20 @@ namespace TestNinja.UnitTests
     [TestFixture]
     public class ErrorLoggerTests
     {
+        private ErrorLogger _logger;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _logger = new ErrorLogger();
+        }
+
         [Test]
         public void Log_WhenCalled_ShouldSetTheLastErrorProperty()
         {
-            var logger = new ErrorLogger();
+            _logger.Log("a");
 
-            logger.Log("a");
-
-            Assert.That(logger.LastError, Is.EqualTo("a"));
+            Assert.That(_logger.LastError, Is.EqualTo("a"));
         }
 
         [Test]
@@ -28,22 +34,18 @@ namespace TestNinja.UnitTests
         [TestCase("     ")]
         public void Log_InvalidErrorText_ShouldThrowArgumentNullException(string error)
         {
-            var logger = new ErrorLogger();
-
-            Assert.That(() => logger.Log(error), Throws.ArgumentNullException);
+            Assert.That(() => _logger.Log(error), Throws.ArgumentNullException);
             // Equivalent to:
-            //Assert.That(() => logger.Log(error), Throws.Exception.TypeOf<ArgumentNullException>);
+            //Assert.That(() => _logger.Log(error), Throws.Exception.TypeOf<ArgumentNullException>);
         }
 
         [Test]
         public void Log_ValidError_RaisesErrorLogEvent()
         {
-            var logger = new ErrorLogger();
-
             var id = Guid.Empty;
-            logger.ErrorLogged += (sender, args) => { id = args; };
+            _logger.ErrorLogged += (sender, args) => { id = args; };
 
-            logger.Log("a");
+            _logger.Log("a");
 
             Assert.That(id, Is.Not.EqualTo(Guid.Empty));
         }
