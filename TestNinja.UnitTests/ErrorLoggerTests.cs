@@ -31,7 +31,7 @@ namespace TestNinja.UnitTests
         {
             Assert.That(() => _logger.Log(error), Throws.ArgumentNullException);
             // Equivalent to:
-            //Assert.That(() => _logger.Log(error), Throws.Exception.TypeOf<ArgumentNullException>);
+            //Assert.That(() => _logger.Log(error), Throws.Exception.TypeOf<ArgumentNullException>());
         }
 
         [Test]
