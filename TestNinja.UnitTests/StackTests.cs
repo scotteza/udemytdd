@@ -7,12 +7,12 @@ namespace TestNinja.UnitTests
     [TestFixture]
     public class StackTests
     {
-        private Stack<int?> _stack;
+        private Stack<string> _stack;
 
         [SetUp]
         public void SetUp()
         {
-            _stack = new Stack<int?>();
+            _stack = new Stack<string>();
         }
 
         [Test]
@@ -23,7 +23,7 @@ namespace TestNinja.UnitTests
         {
             for (var i = 0; i < numberOfElementsToAdd; i++)
             {
-                _stack.Push(i);
+                _stack.Push(i.ToString());
             }
 
             Assert.That(_stack.Count, Is.EqualTo(numberOfElementsToAdd));
@@ -38,10 +38,10 @@ namespace TestNinja.UnitTests
         [Test]
         public void Push_WhenCalledWithValidArgument_PushesElementOntoStack()
         {
-            _stack.Push(1);
+            _stack.Push("a");
 
             Assert.That(_stack.Count, Is.EqualTo(1));
-            Assert.That(_stack.Peek, Is.EqualTo(1));
+            Assert.That(_stack.Peek, Is.EqualTo("a"));
         }
 
         [Test]
@@ -53,22 +53,23 @@ namespace TestNinja.UnitTests
         [Test]
         public void Pop_WhenCalled_ReturnsLastElementAdded()
         {
-            _stack.Push(1);
-            _stack.Push(2);
-            _stack.Push(3);
+            _stack.Push("a");
+            _stack.Push("b");
+            _stack.Push("c");
 
-            Assert.That(_stack.Pop(), Is.EqualTo(3));
+            Assert.That(_stack.Pop(), Is.EqualTo("c"));
         }
 
         [Test]
         public void Pop_WhenCalled_DecreasesTheSizeOfTheStack()
         {
-            _stack.Push(1);
-            _stack.Push(2);
-            _stack.Push(3);
-            var result = _stack.Pop();
+            _stack.Push("a");
+            _stack.Push("b");
+            _stack.Push("c");
 
-            Assert.That(result, Is.EqualTo(3));
+            _stack.Pop();
+
+            Assert.That(_stack.Count, Is.EqualTo(2));
         }
 
         [Test]
@@ -80,20 +81,23 @@ namespace TestNinja.UnitTests
         [Test]
         public void Peek_WhenCalled_ReturnsTheLastElementAdded()
         {
-            _stack.Push(1);
-            _stack.Push(2);
+            _stack.Push("a");
+            _stack.Push("b");
+            _stack.Push("c");
+            
             var result = _stack.Peek();
 
-            Assert.That(result, Is.EqualTo(2));
+            Assert.That(result, Is.EqualTo("c"));
         }
 
         [Test]
         public void Peek_WhenCalled_DoesntPopTheLastElement()
         {
-            _stack.Push(1);
-            _stack.Push(2);
+            _stack.Push("a");
+            _stack.Push("b");
+            _stack.Push("c");
 
-            Assert.That(_stack.Count, Is.EqualTo(2));
+            Assert.That(_stack.Count, Is.EqualTo(3));
         }
     }
 }
