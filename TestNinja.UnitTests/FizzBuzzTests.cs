@@ -12,8 +12,6 @@ namespace TestNinja.UnitTests
     [TestFixture]
     public class FizzBuzzTests
     {
-        private FizzBuzz _fizzBuzz;
-
         [Test]
         public void GetOutput_WhenCalledWithMultipleOf5And3_ReturnFizzBuzz()
         {
