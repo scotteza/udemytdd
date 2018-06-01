@@ -8,20 +8,18 @@ namespace TestNinja.Mocking
 {
     public class VideoService
     {
-        public IFileReader FileReader { get; set; }
+        private readonly IFileReader _fileReader;
 
-        public VideoService()
+        public VideoService(IFileReader fileReader = null)
         {
-            FileReader = new FileReader();
+            _fileReader = fileReader ?? new FileReader();
         }
 
         public string ReadVideoTitle()
         {
-            var str = FileReader.Read("video.txt");
+            var str = _fileReader.Read("video.txt");
             var video = JsonConvert.DeserializeObject<Video>(str);
-            if (video == null)
-                return "Error parsing the video.";
-            return video.Title;
+            return video == null ? "Error parsing the video." : video.Title;
         }
 
         public string GetUnprocessedVideosAsCsv()
